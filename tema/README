@@ -1,0 +1,48 @@
+###########################################################
+Nume: Coman Diana Stefania
+Grupa: 335CA
+Tema: Tema1ASC, Marketplace
+Dificultate: Usoara
+###########################################################
+Am completat clasele producer, consumer si marketplace
+astfel:
+
+In consumer.py, am initializat in self variabilile primite 
+ca parametru si id_cart la 0
+In run, pt fiecare cart din lista, dau in marketplace
+new_cart() pt a primi o nou id pentru fiecare cart. Apoi
+trimit in marketplace la comenzile de add si remove. 
+In final, afisez cartul dupa ce se realizeaza toate aceste
+operatii. Am folosit un lock pentru generarea id-ului 
+astfel incat sa nu existe 2 cart-uri cu acelasi id in 
+consumeri diferiti.
+
+In producer.py, asemanator cu consumer.py, am initializat
+variabilile, si id_producer l-am initializat la 0
+Se face call la register_producer si se intoarce id-ul
+producerului
+Apoi in run, se produc la infinit produse, date de parametrul
+products, respectandu-se timpii de asteptare necesari.
+Din nou, am folosit un lock pt id_producer, pt a evita ca 2 
+produceri sa aiba acelasi id.
+
+In marketplace, am realizat initializarile si am declarat 3 
+liste de liste in care retin produsele puse in marketplace 
+de fiecare producator (queuep), un auxiliar rqueuep folosit 
+in cadrul operatiei de remove, pentru ca produsul sa fie 
+readaugat de unde a fost luat, si o lista cu cart-urile
+cumparatorilor.
+Apoi in register_producer am incrementat variabila
+self_count_prod, apoi am intors valoarea sa minus 1 ca id
+In publish se verifica daca producatorul mai are loc in
+marketplace. Daca da, se publica produsul.
+In new_cart se intoarce un nou id pt fiecare cart, folosind
+aceeasi metoda ca la register_producer.
+In add_to_cart se adauga produsul in cartul cumparatorului,
+se sterge de la producator, si este tinut minte in rqueue in
+cazul operatiei de remove.
+In remove_from_cart, se procedeaza invers, se sterge produsul
+din cart, e cautat in rqueue si i se adauga inapoi producatorului
+de la care a venit.
+In place_order, se returneaza cart-ul consumatorului specificat.
+#################################################################
